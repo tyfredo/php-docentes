@@ -35,14 +35,22 @@ class FirestoreClient
     ];
 
     if ($body !== null) {
-      $options['http']['content'] = json_encode($body);
+      $options['http']['content'] = json_encode($body, JSON_UNESCAPED_UNICODE);
     }
 
     $context = stream_context_create($options);
     $response = file_get_contents($url, false, $context);
 
+    if ($response === false) {
+      throw new Exception('No se pudo conectar con Firestore');
+    }
+
     $json = json_decode($response, true);
 
-    return is_array($json) ? $json : [];
+    if (!is_array($json)) {
+      throw new Exception('Respuesta inválida de Firestore: ' . $response);
+    }
+
+    return $json;
   }
 }
