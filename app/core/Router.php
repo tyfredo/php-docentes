@@ -2,16 +2,16 @@
     class Router{
         private array $routes =[];
 
-        public function get($string $path, callable $handler) : void {
+        public function get(string $path, callable $handler) : void {
             $this->routes['GET'][$path] = $handler;
         }
-        public function post($string $path, callable $handler) : void {
+        public function post(string $path, callable $handler) : void {
             $this->routes['POST'][$path] = $handler;
         }
-        public function patch($string $path, callable $handler) : void {
+        public function patch(string $path, callable $handler) : void {
             $this->routes['PATCH'][$path] = $handler;
         }
-        public function delete($string $path, callable $handler) : void {
+        public function delete(string $path, callable $handler) : void {
             $this->routes['DELETE'][$path] = $handler;
         }
 
